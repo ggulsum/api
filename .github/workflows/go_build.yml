@@ -1,0 +1,47 @@
+name: Go Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.16  # İlgili Go sürümünü buraya ekleyin veya uygun sürümü belirtin
+
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/go/pkg/mod
+            ~/.cache/go-build
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Install dependencies
+        run: go mod download
+
+      - name: Build project
+        run: go build -v ./...
+
+      - name: Test project
+        run: go test -v ./...
+
+      - name: Lint project
+        run: |
+          # gosec'i indir ve çalıştır
+          GO111MODULE=on go get github.com/securego/gosec/v2/cmd/gosec@latest
+          gosec ./...
