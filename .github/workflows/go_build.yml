@@ -3,10 +3,10 @@ name: Go Build and Test
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -15,14 +15,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false # Daha yeni bir sürüm kullanarak Node.js uyumluluk sorununu çözebilir.
 
       - name: Set up Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v4
         with:
-          go-version: 1.16  # İlgili Go sürümünü buraya ekleyin veya uygun sürümü belirtin
+          go-version: 1.16 # İlgili Go sürümünü buraya ekleyin veya uygun sürümü belirtin
 
       - name: Cache Go modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/go/pkg/mod
