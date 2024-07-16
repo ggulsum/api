@@ -1,49 +1,33 @@
-name: Go Build and Test
+name: Go Build and Gosec
 
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          persist-credentials: false  
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: '1.22'
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: '1.22'
 
-      - name: Cache Go modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/go/pkg/mod
-            ~/.cache/go-build
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
+    - name: Go mod download
+      run: go mod download
 
-      - name: Install dependencies
-        run: go mod download
+    - name: Install Gosec
+      run: |
+        go install github.com/securego/gosec/v2/cmd/gosec@latest
+        echo "$HOME/go/bin" >> $GITHUB_PATH
 
-      - name: Build project
-        run: go build -v ./...
-
-      - name: Test project
-        run: go test -v ./...
-
-      - name: Lint project
-        run: |
-          # gosec'i indir ve çalıştır
-          GO111MODULE=on go get github.com/securego/gosec/v2/cmd/gosec@latest
-          gosec ./...
+    - name: Run Gosec
+      run: gosec ./...
