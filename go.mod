@@ -1,6 +1,6 @@
 module github.com/projectcalico/api
 
-go 1.23
+go 1.22.5
 
 require (
 	github.com/onsi/ginkgo v1.16.5
