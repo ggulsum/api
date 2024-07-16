@@ -16,12 +16,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          persist-credentials: false  # Daha yeni bir sürüm kullanarak Node.js uyumluluk sorununu çözebilir.
+          persist-credentials: false  
 
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: 1.22.3  # İlgili Go sürümünü buraya ekleyin veya uygun sürümü belirtin
+          go-version: 1.22 
 
       - name: Cache Go modules
         uses: actions/cache@v4
