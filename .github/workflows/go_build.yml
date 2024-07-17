@@ -9,14 +9,17 @@ on:
       - master 
 
 jobs:
-  use-external-action:
+  hello-world:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Run GoSec
-      uses: ggulsum/actions_/.github/workflows/gosec.yml@master
+    - name: Print Hello World
+      run: echo "Hello, World"
+      
+  use-external-action:
+    uses: ggulsum/actions_/.github/workflows/gosec.yml@master
 
 
 
