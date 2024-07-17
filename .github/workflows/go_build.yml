@@ -15,19 +15,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Set up Go
-      uses: actions/setup-go@v3
-      with:
-        go-version: '1.22'
-
-    - name: Go mod download
-      run: go mod download
-
-    - name: Install Gosec
-      run: |
-        go install github.com/securego/gosec/v2/cmd/gosec@latest
-        echo "$HOME/go/bin" >> $GITHUB_PATH
-
-    - name: Run Gosec
-      run: gosec ./...
+      
+    - name: Use shared GoSec action
+      uses: ggulsum/actions/.github/workflows/go-build.yml@master
