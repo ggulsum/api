@@ -1,4 +1,4 @@
-name: Go Build and Gosec
+name: Call Reusable Go Build and Gosec
 
 on:
   push:
@@ -9,16 +9,8 @@ on:
       - master
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-  use-external-action:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-    - name: Use shared GoSec action
-      uses: ggulsum/actions_/.github/workflows/gosec.yml@master
+  call-reusable-workflow:
+    uses: ggulsum/actions_/.github/workflows/gosec.yml@master
+    with:
+      go_version: '1.22'
+      repository: 'ggulsum/api'
