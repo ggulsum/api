@@ -1,4 +1,4 @@
-name: Reuse Success Action
+name: Use External GoSec Action
 
 on:
   push:
@@ -6,15 +6,7 @@ on:
   pull_request:
 
 jobs:
-  hello-world:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Print Hello World
-      run: echo "Hello, World"
-
   use-external-action:
     uses: ggulsum/actions_/.github/workflows/gosec.yml@master
+    secrets: inherit
 
