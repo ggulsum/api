@@ -1,19 +1,19 @@
-name: Call Reusable Go Build and Gosec
+name: Reuse Success Action
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
   pull_request:
-    branches:
-      - master
 
 jobs:
-  call-reusable-workflow:
+  hello-world:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Call reusable Go Build and Gosec workflow
-        uses: ggulsum/actions_/.github/workflows/gosec.yml
-        with:
-          go_version: '1.22'
-          repository: 'ggulsum/api'
+    - uses: actions/checkout@v2
+
+    - name: Print Hello World
+      run: echo "Hello, World"
+
+  use-external-action:
+    uses: ggulsum/actions_/.github/workflows/gosec.yml@master
