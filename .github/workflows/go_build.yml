@@ -17,3 +17,4 @@ jobs:
 
   use-external-action:
     uses: ggulsum/actions_/.github/workflows/gosec.yml@master
+
