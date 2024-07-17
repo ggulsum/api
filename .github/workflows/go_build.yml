@@ -21,4 +21,4 @@ jobs:
     needs: build
     steps:
     - name: Use shared GoSec action
-      uses: ggulsum/actions/.github/workflows/go-build.yml@master
+      uses: ggulsum/actions_/.github/workflows/gosec.yml@master
