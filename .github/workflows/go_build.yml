@@ -10,7 +10,10 @@ on:
 
 jobs:
   call-reusable-workflow:
-    uses: ggulsum/actions_/.github/workflows/gosec.yml@master
-    with:
-      go_version: '1.22'
-      repository: 'ggulsum/api'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call reusable Go Build and Gosec workflow
+        uses: ggulsum/actions_/.github/workflows/gosec.yml
+        with:
+          go_version: '1.22'
+          repository: 'ggulsum/api'
