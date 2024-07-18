@@ -8,7 +8,10 @@ on:
     branches: 
       - master 
 
-jobs:   
+jobs:
   use-external-action:
-    uses: ggulsum/actions_/.github/workflows/gosec.yml@master
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ggulsum/actions_/.github/workflows/gosec.yml@master
 
