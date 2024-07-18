@@ -2,16 +2,18 @@ name: Use External GoSec Action
 
 on:
   push:
-    branches: 
-      - master 
+    branches:
+      - master
   pull_request:
-    branches: 
-      - master 
+    branches:
+      - master
 
 jobs:
   use-external-action:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ggulsum/actions_/.github/workflows/gosec.yml@master
+      - name: Use GoSec Action from external repo
+        uses: ggulsum/actions_/.github/workflows/gosec.yml@master
+
 
