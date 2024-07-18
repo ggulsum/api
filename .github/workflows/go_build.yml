@@ -12,8 +12,12 @@ jobs:
   use-external-action:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use GoSec Action from external repo
+      - name: Checkout Repository
+        id: checkout_repo
+        uses: actions/checkout@v2
+
+      - name: Use External GoSec Action
         uses: ggulsum/actions_/.github/workflows/gosec.yml@master
+
 
 
